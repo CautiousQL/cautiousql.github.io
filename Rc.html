@@ -1,0 +1,201 @@
+<html>
+<head>
+<script src="jQuery.js"></script>
+</head>
+
+<body>
+    <!-- <select name="" id="first_ring">
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="300">300</option>
+        <option value="400">400</option>
+    </select> -->
+
+    <!-- <script>
+            $(function(){
+                $("#first_ring").change(function(e){
+                    console.log("选择" + e.target.value);
+                })
+            })
+        </script> -->
+
+
+    <div>
+        <!-- 左边：阻值，色环 -->
+        <div>
+            <!-- 阻值 -->
+            <span>第一色环:</span>
+            <select name="" id="first_ring">
+                <option value="0" selected disabled>请选择</option>
+            </select>
+        </div>
+
+        <div>
+            <!-- 阻值 -->
+            <span>第二色环:</span>
+            <select name="" id="second_ring">
+                <option value="0" selected disabled>请选择</option>
+            </select>
+        </div>
+
+        <div>
+            <!-- 倍率 -->
+            <span>第三色环:</span>
+            <select name="" id="third_ring">
+                <option value="0" selected disabled>请选择</option>
+            </select>
+        </div>
+
+        <div>
+            <!-- 误差 -->
+            <span>第四色环:</span>
+            <select name="" id="fourth_ring">
+                <option value="0" selected disabled>请选择</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        结果是：
+        <span id="result"></span>
+    </div>
+    
+    <script>
+        
+        //色环电阻
+        RingColor_one = [
+            {
+                color : "black",
+                name : "黑色",
+                value : "0",
+            },
+            {
+                color: "brown",
+                name: "棕色",
+                value: "1",
+            },
+            {
+                color: "red",
+                name: "红色",
+                value: "2",
+            },
+            {
+                color: "orange",
+                name: "橙色",
+                value: "3",
+            },
+            {
+                color: "yellow",
+                name: "黄色",
+                value: "4",
+            },
+            {
+                color: "green",
+                name: "绿色",
+                value: "5",
+            },
+            {
+                color: "blue",
+                name: "蓝色",
+                value: "6",
+            },
+            {
+                color: "violet",
+                name: "紫色",
+                value: "7",
+            },
+            {
+                color: "grey",
+                name: "灰色",
+                value: "8",
+            },
+
+            {
+                color: "white",
+                name: "白色",
+                value: "9",
+            },
+        ];
+
+        //倍率
+        RingColor_two = [
+            {
+                color: "silver",
+                name: "银色",
+                value: "0.01",
+            },
+            {
+                color: "gold",
+                name: "金色",
+                value: "0.1",
+            },
+            {
+                color: "black",
+                name: "黑色",
+                value: "1",
+            },
+        ];
+
+        //误差
+        RingColor_three = [
+            
+            
+        ];
+        
+        
+        
+        $(function(){
+            const getResult = () => {
+                let ring_1 = parseFloat($("#first_ring").val());
+                let ring_2 = parseFloat($("#second_ring").val());
+                let ring_3 = parseFloat($("#third_ring").val());
+                let ring_4 = parseFloat($("#fourth_ring").val());
+                let result = (ring_1 * 10 + ring_2) * ring_3 * ring_4;
+                $("#result").text(result);
+            }
+
+            //遍历，获得option标签
+           RingColor_one.map(function(item){
+            $("#first_ring").append(
+                `<option value = "${item.value}">${item.name}</option>`
+            )
+            $("#second_ring").append(
+                `<option value="${item.value}">${item.name}</option>`
+            )
+            })
+
+            //倍率和误差
+            RingColor_two.map(function(item){
+            $("#third_ring").append(
+                `<option value="${item.value}">${item.name}</option>`
+            )
+            $("#fourth_ring").append(
+                `<option value="${item.value}">${item.name}</option>`
+            )
+            })
+            
+            //绑定change事件
+            $("#first_ring").change(function(e){
+                getResult();
+            })
+            $("#second_ring").change(function (e) {
+                getResult();
+            })
+            $("#third_ring").change(function (e) {
+                getResult();
+            })
+            $("#fourth_ring").change(function (e) {
+                getResult();
+            })
+
+            
+            
+        })
+ 
+
+
+
+    </script>
+
+
+</body>
+</html>
