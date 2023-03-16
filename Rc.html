@@ -19,6 +19,14 @@
             })
         </script> -->
 
+        <!-- $(function getResult(){
+        let ring_1 = parseFloat($("#first_ring").val());
+        let ring_2 = parseFloat($("#second_ring").val());
+        let ring_3 = parseFloat($("#third_ring").val());
+        let ring_4 = parseFloat($("#fourth_ring").val());
+        let result = (ring_1 * 10 + ring_2) * ring_3 * ring_4;
+        $("#result").text(result);
+        }) -->
 
     <div>
         <!-- 左边：阻值，色环 -->
@@ -56,7 +64,9 @@
     </div>
     <div>
         结果是：
-        <span id="result"></span>
+        <span id="result1"></span>
+        ~
+        <span id="result2"></span>
     </div>
     
     <script>
@@ -119,6 +129,57 @@
         //倍率
         RingColor_two = [
             {
+                color: "black",
+                name: "黑色",
+                value: "1",
+            },
+            {
+                color: "brown",
+                name: "棕色",
+                value: "10",
+            },
+            {
+                color: "red",
+                name: "红色",
+                value: "100",
+            },
+            {
+                color: "orange",
+                name: "橙色",
+                value: "1000",
+            },
+            {
+                color: "yellow",
+                name: "黄色",
+                value: "10000",
+            },
+            {
+                color: "green",
+                name: "绿色",
+                value: "100000",
+            },
+            {
+                color: "blue",
+                name: "蓝色",
+                value: "1000000",
+            },
+            {
+                color: "violet",
+                name: "紫色",
+                value: "10000000",
+            },
+            {
+                color: "grey",
+                name: "灰色",
+                value: "100000000",
+            },
+
+            {
+                color: "white",
+                name: "白色",
+                value: "1000000000",
+            },
+            {
                 color: "silver",
                 name: "银色",
                 value: "0.01",
@@ -128,20 +189,54 @@
                 name: "金色",
                 value: "0.1",
             },
-            {
-                color: "black",
-                name: "黑色",
-                value: "1",
-            },
         ];
 
         //误差
         RingColor_three = [
-            
-            
+            {
+                color: "brown",
+                name: "棕色",
+                value: "0.01",
+            },
+            {
+                color: "red",
+                name: "红色",
+                value: "0.02",
+            },
+            {
+                color: "green",
+                name: "绿色",
+                value: "0.005",
+            },
+            {
+                color: "blue",
+                name: "蓝色",
+                value: "0.0025",
+            },
+            {
+                color: "violet",
+                name: "紫色",
+                value: "0.001",
+            },
+            {
+                color: "grey",
+                name: "灰色",
+                value: "0.0005",
+            },
+            {
+                color: "gold",
+                name: "金色",
+                value: "0.05",
+            },
+            {
+                color: "silver",
+                name: "银色",
+                value: "0.1",
+            },
         ];
         
         
+            
         
         $(function(){
             const getResult = () => {
@@ -149,8 +244,10 @@
                 let ring_2 = parseFloat($("#second_ring").val());
                 let ring_3 = parseFloat($("#third_ring").val());
                 let ring_4 = parseFloat($("#fourth_ring").val());
-                let result = (ring_1 * 10 + ring_2) * ring_3 * ring_4;
-                $("#result").text(result);
+                let result1 = (ring_1 * 10 + ring_2) * ring_3 * (1 - ring_4);
+                let result2 = (ring_1 * 10 + ring_2) * ring_3 * (1 + ring_4);
+                $("#result1").text(result1);
+                $("#result2").text(result2);
             }
 
             //遍历，获得option标签
@@ -163,18 +260,22 @@
             )
             })
 
-            //倍率和误差
+            //倍率
             RingColor_two.map(function(item){
             $("#third_ring").append(
                 `<option value="${item.value}">${item.name}</option>`
             )
-            $("#fourth_ring").append(
-                `<option value="${item.value}">${item.name}</option>`
-            )
             })
             
+            //误差
+            RingColor_three.map(function(item){
+                $("#fourth_ring").append(
+                    `<option value="${item.value}">${item.name}</option>`
+                )
+            })
+
             //绑定change事件
-            $("#first_ring").change(function(e){
+            $("#first_ring").change(function (e) {
                 getResult();
             })
             $("#second_ring").change(function (e) {
